@@ -1,0 +1,50 @@
+@use "../../styles/partials/mixins" as *;
+
+.header {
+    padding-inline: 1rem;
+    background-color: rgb(3, 3, 80);
+    color: white;
+
+    @include tablet {
+        padding-inline: 1.5rem;
+    }
+
+    &__container {
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 5rem;
+        width: 100%;
+
+        @include desktop {
+
+            width: 63.75rem;
+            margin: auto;
+        }
+    }
+
+    &__logo {
+        height: 3rem;
+
+        @include tablet {
+            height: 4rem;
+        }
+    }
+
+    &__elements {
+        display: flex;
+        gap: 1rem;
+        font-size: 12px;
+
+        @include tablet {
+            font-size: .875rem;
+            gap: 3rem;
+        }
+
+        &-link {
+            text-decoration: none;
+            color: white;
+        }
+    }
+}
