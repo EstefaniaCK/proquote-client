@@ -2,7 +2,7 @@
 
 .header {
     padding-inline: 1rem;
-    background-color: rgb(3, 3, 80);
+    background-color: black;
     color: white;
 
     @include tablet {
@@ -18,7 +18,6 @@
         width: 100%;
 
         @include desktop {
-
             width: 63.75rem;
             margin: auto;
         }
@@ -35,7 +34,7 @@
     &__elements {
         display: flex;
         gap: 1rem;
-        font-size: 12px;
+        font-size: 0.75rem;
 
         @include tablet {
             font-size: .875rem;

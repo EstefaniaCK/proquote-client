@@ -1,0 +1,22 @@
+@use "../../styles/partials/mixins" as *;
+
+.footer {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+
+    @include tablet {
+        padding-inline: 1.5rem;
+    }
+
+    &__rights {
+        font-size: .75rem;
+        align-self: center;
+
+        @include tablet {
+            font-size: .875rem;
+        }
+    }
+}
