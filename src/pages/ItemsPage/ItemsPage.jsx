@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-export default function Items() {
+import "./ItemsPage.scss"
+export default function ItemsPage() {
     const [items, setItems] = useState([]);
     const [unitPrice, setUnitPrice] = useState({});
+    const quantity = [];
+    const ids = [];
     const params = useParams();
     const projectid = params.projectid;
 
@@ -17,7 +20,23 @@ export default function Items() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(unitPrice)
+
+        const pricingList = [];
+        const total = quantity.map((item, index) => {
+            let test = {
+                item_id: ids[index],
+                quantity: quantity[index],
+                unit_price: unitPrice[ids[index]],
+                total: item * unitPrice[ids[index]],
+                user_id: 1,
+                project_id: projectid
+            }
+            pricingList.push(test);
+
+        })
+
+        console.log(pricingList)
+        axios.post('http://localhost:8080/bids', pricingList)
     }
 
     useEffect(() => {
@@ -33,6 +52,8 @@ export default function Items() {
                     {items.map((item) => {
                         return (
                             <li key={item.id} className='items__item'>
+                                {quantity.push(item.quantity)}
+                                {ids.push(item.id)}
                                 <h1 className='items__title'>{item.name}</h1>
                                 <p>{item.unit}</p>
                                 <p>{item.quantity}</p>

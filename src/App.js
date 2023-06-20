@@ -1,15 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.scss';
-import HomePage from './pages/HomePage';
-import ProjectList from './pages/ProjectList/ProjectList';
-import Items from './pages/Items/Items';
+
+import HomePage from './pages/HomePage/HomePage';
+import ProjectListPage from './pages/ProjectList/ProjectList';
+import BidsPage from './pages/BidsPage/BidsPage';
+import ItemsPage from './pages/ItemsPage/ItemsPage';
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/projects' element={<ProjectList />} />
-        <Route path='/projects/:projectid/items' element={<Items />} />
+        <Route path='/projects' element={<ProjectListPage />} />
+        <Route path='/projects/:projectid/items' element={<ItemsPage />} />
+        <Route path='/bids' element={<BidsPage />} />
       </Routes>
 
     </BrowserRouter>
