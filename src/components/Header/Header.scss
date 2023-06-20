@@ -4,6 +4,8 @@
     padding-inline: 1rem;
     background-color: black;
     color: white;
+    width: 100%;
+    border-bottom: 0.125rem solid white;
 
     @include tablet {
         padding-inline: 1.5rem;
@@ -26,6 +28,7 @@
     &__logo {
         height: 3rem;
 
+
         @include tablet {
             height: 4rem;
         }
@@ -33,6 +36,7 @@
 
     &__elements {
         display: flex;
+
         gap: 1rem;
         font-size: 0.75rem;
 
