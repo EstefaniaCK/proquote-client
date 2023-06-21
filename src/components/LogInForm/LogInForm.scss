@@ -1,0 +1,30 @@
+@use "../../styles/partials/mixins" as *;
+
+.form {
+    background-color: white;
+    box-shadow: .625rem .625rem .625rem rgba(245, 245, 245, 0.743);
+    border-radius: .3125rem;
+    max-width: 1020px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 15rem;
+    padding: 2rem;
+    position: relative;
+    top: 3.75rem;
+    left: -15rem;
+
+
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__button {
+        padding-top: 1rem;
+    }
+
+
+
+}

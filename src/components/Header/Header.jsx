@@ -1,6 +1,6 @@
 import "./Header.scss"
 import logo from "../../assets/logo/blacklogo.png"
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 
 export default function Header() {
@@ -12,10 +12,14 @@ export default function Header() {
                     src={logo}
                     alt="proquote-logo" />
                 <div className="header__elements">
-                    <Link to="/" className="header__elements-link">
+
+                    <Link to="/"
+                        className="header__elements-link">
                         <p className="header__elements-home">Home</p>
                     </Link>
-                    <p className="header__elements-projects">Projects</p>
+                    <Link to="/projects" className="header__elements-link">
+                        <p className="header__elements-projects">Projects</p>
+                    </Link>
                 </div>
             </div>
         </header>
