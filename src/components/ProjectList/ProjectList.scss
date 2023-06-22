@@ -1,0 +1,9 @@
+@use "../../styles/partials/mixins" as *;
+
+.project-list {
+    &__table {
+        padding-inline: 1.5rem;
+        width: 90%;
+        margin: auto;
+    }
+}

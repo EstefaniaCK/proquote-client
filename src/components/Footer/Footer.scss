@@ -1,5 +1,11 @@
 @use "../../styles/partials/mixins" as *;
 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .footer {
     background-color: black;
     color: white;
@@ -7,6 +13,7 @@
     display: flex;
     justify-content: center;
     border-top: 0.125rem solid white;
+    margin-top: auto;
 
     @include tablet {
         padding-inline: 1.5rem;

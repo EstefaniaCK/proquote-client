@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.scss';
 
 import HomePage from './pages/HomePage/HomePage';
-import ProjectListPage from './pages/ProjectList/ProjectList';
+import ProjectListPage from './pages/ProjectListPage/ProjectListPage';
 import BidsPage from './pages/BidsPage/BidsPage';
 import ItemsPage from './pages/ItemsPage/ItemsPage';
 
