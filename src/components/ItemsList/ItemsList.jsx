@@ -87,43 +87,43 @@ export default function ItemsList() {
 
 
     return (
+        <section className='items-list__table'>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell align="left">Item Name</StyledTableCell>
+                            <StyledTableCell align="left">Unit</StyledTableCell>
+                            <StyledTableCell align="left">Quantity</StyledTableCell>
+                            <StyledTableCell align="left">Unit Price</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {items.map((item) => (
+                            <StyledTableRow
+                                key={item.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <StyledTableCell align="left">{item.name}</StyledTableCell>
+                                <StyledTableCell align="left">{item.unit}</StyledTableCell>
+                                <StyledTableCell align="left">{item.quantity}</StyledTableCell>
+                                <StyledTableCell>
+                                    <FormControl sx={{ m: 1, width: '20ch' }}>
+                                        <InputLabel htmlFor={`outlined-adornment-amount-${item.id}`}>Unit Price</InputLabel>
+                                        <OutlinedInput
+                                            id={`outlined-adornment-amount-${item.id}`}
+                                            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                            label="Unit Price"
+                                        />
+                                    </FormControl>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell align="left">Item Name</StyledTableCell>
-                        <StyledTableCell align="left">Unit</StyledTableCell>
-                        <StyledTableCell align="left">Quantity</StyledTableCell>
-                        <StyledTableCell align="left">Unit Price</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {items.map((item) => (
-                        <StyledTableRow
-                            key={item.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <StyledTableCell align="left">{item.name}</StyledTableCell>
-                            <StyledTableCell align="left">{item.unit}</StyledTableCell>
-                            <StyledTableCell align="left">{item.quantity}</StyledTableCell>
-                            <StyledTableCell>
-                                <FormControl sx={{ m: 1, width: '20ch' }}>
-                                    <InputLabel htmlFor={`outlined-adornment-amount-${item.id}`}>Unit Price</InputLabel>
-                                    <OutlinedInput
-                                        id={`outlined-adornment-amount-${item.id}`}
-                                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                        label="Unit Price"
-                                    />
-                                </FormControl>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-
-
+        </section>
 
 
         // <div className='items'>

@@ -1,17 +1,17 @@
 import Header from '../../components/Header/Header';
 import ProjectList from '../../components/ProjectList/ProjectList';
 import Footer from '../../components/Footer/Footer';
-import "./ProjectListPage.scss"
+import "./ProjectsPage.scss"
 
 
-export default function ProjectListPage() {
+export default function ProjectsPage() {
 
     return (
-        <section className='projectlistpage'>
+        <div className='project-page'>
             <Header />
             <ProjectList />
             <Footer />
-        </section>
+        </div>
     );
 }
 
