@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import "./ItemsList.scss"
 
 import * as React from 'react';
@@ -54,9 +54,11 @@ export default function ItemsList() {
 
     const [items, setItems] = useState([]);
     const [unitPrices, setUnitPrices] = useState({});
-    const [inputPrice, setInputPrice] = useState("");
+    const [inputPrice, setInputPrice] = useState(0);
+    const [grandTotal, setGrandTotal] = useState(0)
     const params = useParams();
     const projectid = params.projectid;
+
 
     useEffect(() => {
         axios.get(`http://localhost:8080/projects/${projectid}/items`)
@@ -73,30 +75,44 @@ export default function ItemsList() {
         console.log(inputPrice);
     };
 
+    const formatNumber = (number) => {
+        return number.toFixed(2).padStart(0, '0');
+    };
+
+    const calculateGrandTotal = () => {
+        let grandTotal = 0;
+
+        items.forEach((item) => {
+            const unitPrice = parseFloat(unitPrices[item.id]) || 0;
+            const subtotal = unitPrice * item.quantity;
+            grandTotal += subtotal;
+        });
+
+        return grandTotal.toFixed(2);
+    };
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const bid = {
             user_id: 1,
             project_id: projectid,
-        }
-        bid.pricingList = items.map((item) => ({
-            item_id: item.id,
-            unit_price: unitPrices[item.id],
-        }));
+            pricingList: items.map((item) => ({
+                item_id: item.id,
+                unit_price: unitPrices[item.id],
+            })),
+        };
 
         axios
             .post('http://localhost:8080/bids', bid)
             .then((response) => {
-                // Handle successful response if needed
-                console.log("HI");
+                alert("Prices submitted successfully");
+                navigate("/projects");
             })
             .catch((error) => {
-                // Handle error if needed
                 console.error(error);
             });
-
-        console.log("HI");
     };
 
 
@@ -135,19 +151,22 @@ export default function ItemsList() {
                                                 align="left"
                                                 value={unitPrices[item.id] || ''}
                                                 onChange={(event) => handleInputChange(event, item.id)}
-
                                             />
                                         </FormControl>
                                     </StyledTableCell>
-                                    {/* I need to multiply the new iput value time the item.quantiy */}
-                                    <StyledTableCell align="left">{inputPrice*item.quantity}</StyledTableCell>
+                                    <StyledTableCell align="left">{formatNumber(inputPrice * item.quantity)}</StyledTableCell>
                                 </StyledTableRow>
                             ))}
+                            <StyledTableRow>
+                                <StyledTableCell align="left">GRAND TOTAL</StyledTableCell>
+                                <StyledTableCell align="left" colSpan={3}></StyledTableCell>
+                                <StyledTableCell align="left">{calculateGrandTotal()}</StyledTableCell>
+                            </StyledTableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <div className='items-list__button'>
-                    <ColorButton size="large" type="sumbit" variant="contained" >SUBMIT</ColorButton>
+                    <ColorButton size="large" type="submit" variant="contained" >SUBMIT</ColorButton>
                 </div>
             </form>
         </section >

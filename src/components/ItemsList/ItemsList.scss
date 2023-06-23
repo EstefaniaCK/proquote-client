@@ -6,7 +6,9 @@
     }
 
     &__button {
+        display: flex;
+        justify-content: flex-end;
         margin: 1rem;
-        transform: translateX(60rem);
+
     }
 }
