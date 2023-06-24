@@ -55,7 +55,6 @@ export default function ItemsList() {
     const [items, setItems] = useState([]);
     const [unitPrices, setUnitPrices] = useState({});
     const [inputPrice, setInputPrice] = useState(0);
-    const [grandTotal, setGrandTotal] = useState(0)
     const params = useParams();
     const projectid = params.projectid;
 
@@ -114,8 +113,6 @@ export default function ItemsList() {
                 console.error(error);
             });
     };
-
-
 
     return (
         <section className='items-list__table'>

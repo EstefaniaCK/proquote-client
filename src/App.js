@@ -9,11 +9,12 @@ import ItemsPage from './pages/ItemsPage/ItemsPage';
 function App() {
   return (
     <BrowserRouter>
+    
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/projects' element={<ProjectsPage />} />
         <Route path='/projects/:projectid/items' element={<ItemsPage />} />
-        <Route path='/bids' element={<BidsPage />} />
+        <Route path='/projects/:projectid/bids' element={<BidsPage />} />
       </Routes>
 
     </BrowserRouter>
