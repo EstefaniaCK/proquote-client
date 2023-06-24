@@ -24,13 +24,26 @@ const ColorTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function BidsList() {
     const [details, setDetails] = useState([]);
+    const [activeProject, setActiveProject] = useState({});
     const { projectid } = useParams();
 
     useEffect(() => {
         axios
             .get(`http://localhost:8080/projects/${projectid}/bids`)
-            .then((response) => setDetails(response.data));
+            .then((response) => {
+                setDetails(response.data);
+            });
     }, [projectid]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/projects')
+            .then((response) => {
+                const projectIdNumber = parseInt(projectid, 10);
+                const project = response.data.find((project) => project.id === projectIdNumber);
+                setActiveProject(project);
+            });
+    }, [projectid]);
+    console.log(activeProject);
 
     const maxBids = details.reduce(
         (max, detail) => Math.max(max, detail.bids.length),
@@ -74,6 +87,22 @@ export default function BidsList() {
 
     return (
         <section className="items-list__table">
+            {activeProject && (
+                <React.Fragment>
+                    <h1>{activeProject.project_name}</h1>
+                    <p>{activeProject.municipality}</p>
+                    <p>Contract No: {activeProject.contract_no}</p>
+                    <p>
+                        Closing Date:{" "}
+                        {activeProject.closing_date &&
+                            new Date(activeProject.closing_date).toLocaleDateString("en-US", {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
+                            })}
+                    </p>
+                </React.Fragment>
+            )}
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="customized table">
                     <TableHead>

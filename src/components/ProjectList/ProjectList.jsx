@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
 import "./ProjectList.scss"
+import Button from "@mui/material/Button";
+import { blue } from "@mui/material/colors";
 
 // Styling from library 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -21,18 +23,33 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
     },
+    width: "5%"
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-   
+
     '&:last-child td, &:last-child th': {
         border: 0,
     },
 }));
 
+const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText("#000000"),
+    backgroundColor: "#000000",
+    "&:hover": {
+        backgroundColor: blue[700],
+    },
+}));
+
+const ButtonContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '40%',
+    gap: '8px',
+});
 
 export default function ProjectList() {
     const navigate = useNavigate()
@@ -52,19 +69,30 @@ export default function ProjectList() {
                             <StyledTableCell align="left">Project Name</StyledTableCell>
                             <StyledTableCell align="left">Municipality</StyledTableCell>
                             <StyledTableCell align="left">Contract No.</StyledTableCell>
-                            <StyledTableCell align="left">Closing Date</StyledTableCell>
+                            <StyledTableCell align="left" colSpan={2}>Closing Date</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {activeProjects.map((project) => (
                             <StyledTableRow
                                 key={project.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <StyledTableCell onClick={() => navigate(`/projects/${project.id}/items`)} align="left">{project.project_name}</StyledTableCell>
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <StyledTableCell align="left">{project.project_name}</StyledTableCell>
                                 <StyledTableCell align="left">{project.municipality}</StyledTableCell>
                                 <StyledTableCell align="left">{project.contract_no}</StyledTableCell>
                                 <StyledTableCell align="left">{project.closing_date.substring(0, 10)}</StyledTableCell>
+                                <StyledTableCell align="left">
+                                    <ButtonContainer>
+                                        <ColorButton size="small" type="submit" variant="contained"
+                                            onClick={() => navigate(`/projects/${project.id}/items`)}>
+                                            Submit Quote
+                                        </ColorButton>
+                                        <ColorButton size="small" type="submit" variant="contained"
+                                            onClick={() => navigate(`/projects/${project.id}/bids`)} >
+                                            View Bids
+                                        </ColorButton>
+                                    </ButtonContainer>
+                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -78,18 +106,3 @@ export default function ProjectList() {
 
 
 
-
-{/* <div className='projects'>
-    <ul className='projects__list'>
-        {activeProjects.map((project) => (
-            <Link key={project.id} to={`/projects/${project.id}/items`}>
-                <li className='projects__item'>
-                    <h1 className='projects__title'>{project.project_name}</h1>
-                </li></Link>
-
-        ))}
-    </ul>
-
-</div>
-    )
-} */}

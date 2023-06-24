@@ -47,6 +47,12 @@
         &-link {
             text-decoration: none;
             color: white;
+
+            &--active {
+                border-bottom: 2px solid white;
+
+            }
         }
     }
 }
+
