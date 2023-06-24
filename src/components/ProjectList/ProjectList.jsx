@@ -47,7 +47,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 const ButtonContainer = styled('div')({
     display: 'flex',
     flexDirection: 'column',
-    width: '40%',
+    width: '50%',
     gap: '8px',
 });
 

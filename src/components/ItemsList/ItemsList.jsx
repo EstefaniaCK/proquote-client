@@ -18,6 +18,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import { blue } from '@mui/material/colors';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+
 
 
 // Style for the button 
@@ -55,6 +60,7 @@ export default function ItemsList() {
     const [items, setItems] = useState([]);
     const [unitPrices, setUnitPrices] = useState({});
     const [inputPrice, setInputPrice] = useState(0);
+    const [openModal, setOpenModal] = useState(false);
     const params = useParams();
     const projectid = params.projectid;
 
@@ -94,8 +100,12 @@ export default function ItemsList() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const userIds = [1, 2, 3, 4, 5];
+        const randomIndex = Math.floor(Math.random() * userIds.length);
+        const randomUserId = userIds[randomIndex];
+
         const bid = {
-            user_id: 1,
+            user_id: randomUserId,
             project_id: projectid,
             pricingList: items.map((item) => ({
                 item_id: item.id,
@@ -106,13 +116,28 @@ export default function ItemsList() {
         axios
             .post('http://localhost:8080/bids', bid)
             .then((response) => {
-                alert("Prices submitted successfully");
-                navigate("/projects");
             })
             .catch((error) => {
                 console.error(error);
             });
     };
+
+    const openModalHandler = () => {
+        const unitPriceValues = Object.values(unitPrices);
+        const allInputsFilled = unitPriceValues.every
+            ((value) => value !== '' && !isNaN(parseFloat(value)));
+
+        if (allInputsFilled) {
+            setOpenModal(true);
+        }
+    };
+
+
+    const closeModalHandler = () => {
+        setOpenModal(false);
+        navigate("/projects");
+    };
+
 
     return (
         <section className='items-list__table'>
@@ -162,8 +187,17 @@ export default function ItemsList() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Dialog open={openModal} onClose={closeModalHandler}>
+                    <DialogTitle>Succes!</DialogTitle>
+                    <DialogContent>
+                        <p>Your quote has been submitted</p>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={closeModalHandler}>Close</Button>
+                    </DialogActions>
+                </Dialog>
                 <div className='items-list__button'>
-                    <ColorButton size="large" type="submit" variant="contained" >SUBMIT</ColorButton>
+                    <ColorButton size="large" type="submit" variant="contained" onClick={openModalHandler}>SUBMIT</ColorButton>
                 </div>
             </form>
         </section >

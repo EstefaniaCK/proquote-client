@@ -20,6 +20,26 @@ const ColorTableCell = styled(TableCell)(({ theme }) => ({
         fontSize: 14,
     },
 }));
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+    width: "5%"
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
 
 
 export default function BidsList() {
@@ -71,7 +91,7 @@ export default function BidsList() {
 
 
         return (
-            <TableRow>
+            <StyledTableRow>
                 <ColorTableCell align="left" colSpan={3}></ColorTableCell>
                 <ColorTableCell align="left">GRAND TOTAL</ColorTableCell>
                 <ColorTableCell align="left" colSpan={1}></ColorTableCell>
@@ -80,7 +100,7 @@ export default function BidsList() {
                         {grandTotal[index]}
                     </ColorTableCell>
                 ))}
-            </TableRow>
+            </StyledTableRow>
         );
     };
 
@@ -106,7 +126,7 @@ export default function BidsList() {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="customized table">
                     <TableHead>
-                        <TableRow>
+                        <StyledTableRow>
                             <ColorTableCell align="left">Item Name</ColorTableCell>
                             <ColorTableCell align="left">Unit</ColorTableCell>
                             <ColorTableCell align="left">Quantity</ColorTableCell>
@@ -119,36 +139,36 @@ export default function BidsList() {
                                         <ColorTableCell align="left">Total</ColorTableCell>
                                     </React.Fragment>
                                 ))}
-                        </TableRow>
+                        </StyledTableRow>
                     </TableHead>
                     <TableBody>
                         {details.map((detail) => (
-                            <TableRow key={detail.id}>
-                                <TableCell align="left">{detail.name}</TableCell>
-                                <TableCell align="left">{detail.unit}</TableCell>
-                                <TableCell align="left">{detail.quantity}</TableCell>
+                            <StyledTableRow key={detail.id}>
+                                <StyledTableCell align="left">{detail.name}</StyledTableCell>
+                                <StyledTableCell align="left">{detail.unit}</StyledTableCell>
+                                <StyledTableCell align="left">{detail.quantity}</StyledTableCell>
                                 {Array(maxBids)
                                     .fill()
                                     .map((_, index) => {
                                         const bid = detail.bids[index];
                                         return (
                                             <React.Fragment key={index}>
-                                                <TableCell align="left">
+                                                <StyledTableCell align="left">
                                                     {bid?.company_name}
-                                                </TableCell>
-                                                <TableCell align="left">
+                                                </StyledTableCell>
+                                                <StyledTableCell align="left">
                                                     {bid?.unit_price}
-                                                </TableCell>
-                                                <TableCell align="left">
+                                                </StyledTableCell>
+                                                <StyledTableCell align="left">
                                                     {bid ? (parseFloat(bid.unit_price) * detail.quantity).toLocaleString(undefined, {
                                                         minimumFractionDigits: 2,
                                                         maximumFractionDigits: 2
                                                     }) : ''}
-                                                </TableCell>
+                                                </StyledTableCell>
                                             </React.Fragment>
                                         );
                                     })}
-                            </TableRow>
+                            </StyledTableRow>
                         ))}
                         {renderGrandTotalRow()}
                     </TableBody>
