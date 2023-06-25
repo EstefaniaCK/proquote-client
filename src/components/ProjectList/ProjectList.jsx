@@ -14,7 +14,7 @@ import "./ProjectList.scss"
 import Button from "@mui/material/Button";
 import { blue } from "@mui/material/colors";
 
-// Styling from library 
+// Table styling 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -36,6 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
+// Button Styling
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#000000"),
     backgroundColor: "#000000",

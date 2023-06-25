@@ -1,7 +1,10 @@
 * {
   box-sizing: content-box;
-
 }
 
-
-
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

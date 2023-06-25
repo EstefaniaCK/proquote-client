@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import * as React from 'react';
 
+// Table styling
 const ColorTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -20,6 +21,7 @@ const ColorTableCell = styled(TableCell)(({ theme }) => ({
         fontSize: 14,
     },
 }));
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -35,7 +37,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-
     '&:last-child td, &:last-child th': {
         border: 0,
     },
@@ -43,6 +44,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function BidsList() {
+
     const [details, setDetails] = useState([]);
     const [activeProject, setActiveProject] = useState({});
     const { projectid } = useParams();
@@ -54,8 +56,7 @@ export default function BidsList() {
                 setDetails(response.data);
             });
     }, [projectid]);
-    console.log(details);
-
+  
     useEffect(() => {
         axios.get('http://localhost:8080/projects')
             .then((response) => {
@@ -64,12 +65,12 @@ export default function BidsList() {
                 setActiveProject(project);
             });
     }, [projectid]);
-    console.log(activeProject);
-
+   
     const maxBids = details.reduce(
         (max, detail) => Math.max(max, detail.bids.length),
         0
     );
+    
     const calculateGrandTotal = () => {
         const grandTotal = Array(maxBids).fill(0);
 
@@ -90,7 +91,6 @@ export default function BidsList() {
     const renderGrandTotalRow = () => {
         const grandTotal = calculateGrandTotal();
 
-
         return (
             <StyledTableRow>
                 <ColorTableCell align="left" colSpan={3}></ColorTableCell>
@@ -104,7 +104,6 @@ export default function BidsList() {
             </StyledTableRow>
         );
     };
-
 
     return (
         <section className="items-list__table">

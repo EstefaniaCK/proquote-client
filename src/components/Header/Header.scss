@@ -26,8 +26,7 @@
 
     &__logo {
         height: 3rem;
-
-
+        
         @include tablet {
             height: 4rem;
         }
@@ -35,14 +34,8 @@
 
     &__elements {
         display: flex;
-
-        gap: 1rem;
+        gap: 2rem;
         font-size: 0.75rem;
-
-        @include tablet {
-            font-size: .875rem;
-            gap: 3rem;
-        }
 
         &-link {
             text-decoration: none;

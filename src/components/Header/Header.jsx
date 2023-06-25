@@ -1,13 +1,11 @@
 import React from "react";
-import "./Header.scss";
 import logo from "../../assets/logo/blacklogo.png";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import "./Header.scss";
 
 export default function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-
-
 
     return (
         <header className="header">

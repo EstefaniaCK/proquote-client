@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
-import "./ItemsList.scss"
-
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -22,10 +20,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import "./ItemsList.scss"
 
 
 
-// Style for the button 
+// Button styling 
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#000000'),
     backgroundColor: '#000000',
@@ -56,7 +55,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export default function ItemsList() {
-
     const [items, setItems] = useState([]);
     const [unitPrices, setUnitPrices] = useState({});
     const [inputPrice, setInputPrice] = useState(0);
@@ -64,13 +62,11 @@ export default function ItemsList() {
     const params = useParams();
     const projectid = params.projectid;
 
-
     useEffect(() => {
         axios.get(`http://localhost:8080/projects/${projectid}/items`)
             .then((response) => setItems(response.data))
     }, [projectid])
-    console.log(items);
-
+    
     const handleInputChange = (event, itemId) => {
         const { value } = event.target;
         setUnitPrices((prevPrices) => ({
@@ -78,7 +74,6 @@ export default function ItemsList() {
             [itemId]: value,
         }));
         setInputPrice(event.target.value)
-        console.log(inputPrice);
     };
 
     const formatNumber = (number) => {
@@ -133,12 +128,10 @@ export default function ItemsList() {
         }
     };
 
-
     const closeModalHandler = () => {
         setOpenModal(false);
         navigate("/projects");
     };
-
 
     return (
         <section className='items-list__table'>
@@ -158,8 +151,7 @@ export default function ItemsList() {
                             {items.map((item) => (
                                 < StyledTableRow
                                     key={item.id}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                     <StyledTableCell align="left">{item.name}</StyledTableCell>
                                     <StyledTableCell align="left">{item.unit}</StyledTableCell>
                                     <StyledTableCell align="left">{item.quantity}</StyledTableCell>
@@ -173,8 +165,7 @@ export default function ItemsList() {
                                                 type="number"
                                                 align="left"
                                                 value={unitPrices[item.id] || ''}
-                                                onChange={(event) => handleInputChange(event, item.id)}
-                                            />
+                                                onChange={(event) => handleInputChange(event, item.id)}/>
                                         </FormControl>
                                     </StyledTableCell>
                                     <StyledTableCell align="left">{formatNumber(inputPrice * item.quantity)}</StyledTableCell>

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./LogInForm.scss";
 import { TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { blue } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
+import "./LogInForm.scss";
 
-// Styling for the button
+// Button styling 
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#000000"),
     backgroundColor: "#000000",
@@ -38,7 +38,6 @@ export default function LogInForm() {
         }
 
         if (username.trim() !== "" && password.trim() !== "") {
-            console.log("123");
             navigate("/projects");
         }
     };
@@ -53,8 +52,7 @@ export default function LogInForm() {
                     margin="normal"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    error={usernameError}
-                />
+                    error={usernameError} />
                 {usernameError && (
                     <Typography variant="caption" color="error">
                         Please enter a username
@@ -65,11 +63,10 @@ export default function LogInForm() {
                     label="Password"
                     variant="outlined"
                     margin="normal"
-                    type="password" 
+                    type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    error={passwordError}
-                />
+                    error={passwordError} />
                 {passwordError && (
                     <Typography variant="caption" color="error">
                         Please enter a password
