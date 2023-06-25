@@ -54,6 +54,7 @@ export default function BidsList() {
                 setDetails(response.data);
             });
     }, [projectid]);
+    console.log(details);
 
     useEffect(() => {
         axios.get('http://localhost:8080/projects')

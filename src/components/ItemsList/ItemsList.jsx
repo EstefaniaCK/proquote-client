@@ -69,6 +69,7 @@ export default function ItemsList() {
         axios.get(`http://localhost:8080/projects/${projectid}/items`)
             .then((response) => setItems(response.data))
     }, [projectid])
+    console.log(items);
 
     const handleInputChange = (event, itemId) => {
         const { value } = event.target;
