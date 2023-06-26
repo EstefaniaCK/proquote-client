@@ -10,6 +10,8 @@ Clone the repository from GitHub: (Please note this project contains a backend a
 
 ```bash
   git clone https://github.com/Estefck/proquote-client.git
+  
+  git clone https://github.com/Estefck/proquote-server.git
 ```
 Navigate to the project directory:
 
