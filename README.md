@@ -6,7 +6,7 @@ ProQuote is a user-friendly web application catered specifically to general cont
 ## Installation
 To run ProQuote locally, please follow these steps:
 
-Clone the repository from GitHub:
+Clone the repository from GitHub: (Please note this project contains a backend as well)
 
 ```bash
   git clone https://github.com/Estefck/proquote-client.git
