@@ -66,7 +66,7 @@ export default function ItemsList() {
         axios.get(`http://localhost:8080/projects/${projectid}/items`)
             .then((response) => setItems(response.data))
     }, [projectid])
-    
+
     const handleInputChange = (event, itemId) => {
         const { value } = event.target;
         setUnitPrices((prevPrices) => ({
@@ -94,6 +94,18 @@ export default function ItemsList() {
 
     const navigate = useNavigate();
 
+    const openModalHandler = () => {
+
+        const unitPriceValues = Object.values(unitPrices);
+        const allInputsFilled = unitPriceValues.every
+            ((value) => value !== '' && !isNaN(parseFloat(value)));
+
+        if (allInputsFilled) {
+            setOpenModal(true);
+        }
+    };
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const userIds = [1, 2, 3, 4, 5];
@@ -116,17 +128,11 @@ export default function ItemsList() {
             .catch((error) => {
                 console.error(error);
             });
+
+        openModalHandler()
     };
 
-    const openModalHandler = () => {
-        const unitPriceValues = Object.values(unitPrices);
-        const allInputsFilled = unitPriceValues.every
-            ((value) => value !== '' && !isNaN(parseFloat(value)));
 
-        if (allInputsFilled) {
-            setOpenModal(true);
-        }
-    };
 
     const closeModalHandler = () => {
         setOpenModal(false);
@@ -165,7 +171,7 @@ export default function ItemsList() {
                                                 type="number"
                                                 align="left"
                                                 value={unitPrices[item.id] || ''}
-                                                onChange={(event) => handleInputChange(event, item.id)}/>
+                                                onChange={(event) => handleInputChange(event, item.id)} />
                                         </FormControl>
                                     </StyledTableCell>
                                     <StyledTableCell align="left">{formatNumber(inputPrice * item.quantity)}</StyledTableCell>
@@ -189,7 +195,7 @@ export default function ItemsList() {
                     </DialogActions>
                 </Dialog>
                 <div className='items-list__button'>
-                    <ColorButton size="large" type="submit" variant="contained" onClick={openModalHandler}>SUBMIT</ColorButton>
+                    <ColorButton size="large" type="submit" variant="contained" >SUBMIT</ColorButton>
                 </div>
             </form>
         </section >
