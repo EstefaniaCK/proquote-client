@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { blue } from "@mui/material/colors";
+import { styled } from "@mui/material/styles";
+import "./SignUpModal.scss"
 
 const style = {
     position: 'absolute',
@@ -17,14 +20,27 @@ const style = {
     p: 4,
 };
 
+const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText("#000000"),
+    backgroundColor: blue[700],
+    "&:hover": {
+        backgroundColor: "#4dabf5",
+    },
+}));
+
 export default function SignUpModal() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+        <div className='sign-up-modal'>
+            <div className='sign-up-modal__button'>
+                <ColorButton size="large" type="submit" variant="contained" className='ColorButton'
+                    onClick={handleOpen}>
+                    Create New Account
+                </ColorButton>
+            </div>
             <Modal
                 open={open}
                 onClose={handleClose}

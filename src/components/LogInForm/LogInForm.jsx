@@ -12,14 +12,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText("#000000"),
     backgroundColor: "#000000",
     "&:hover": {
-        backgroundColor: blue[700],
-    },
-}));
-
-const ColorButtonTwo = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#000000"),
-    backgroundColor: blue[700],
-    "&:hover": {
         backgroundColor: "#4dabf5",
     },
 }));
@@ -30,7 +22,7 @@ export default function LogInForm() {
     const [password, setPassword] = useState("");
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    const [displayModal, setDisplayModal] = useState(false);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -86,10 +78,7 @@ export default function LogInForm() {
             <ColorButton size="large" type="submit" variant="contained">
                 Log In
             </ColorButton>
-            <ColorButtonTwo size="large" type="submit" variant="contained">
-                Create new account
-            </ColorButtonTwo>
-            <SignUpModal />
+            <SignUpModal/>
         </form>
     );
 }
