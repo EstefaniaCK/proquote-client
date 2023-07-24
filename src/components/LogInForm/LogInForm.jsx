@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { blue } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import "./LogInForm.scss";
+import SignUpModal from "../SignUpModal/SignUpModal"
 
 // Button styling 
 const ColorButton = styled(Button)(({ theme }) => ({
@@ -15,12 +16,21 @@ const ColorButton = styled(Button)(({ theme }) => ({
     },
 }));
 
+const ColorButtonTwo = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText("#000000"),
+    backgroundColor: blue[700],
+    "&:hover": {
+        backgroundColor: "#4dabf5",
+    },
+}));
+
 export default function LogInForm() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [displayModal, setDisplayModal] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -76,6 +86,10 @@ export default function LogInForm() {
             <ColorButton size="large" type="submit" variant="contained">
                 Log In
             </ColorButton>
+            <ColorButtonTwo size="large" type="submit" variant="contained">
+                Create new account
+            </ColorButtonTwo>
+            <SignUpModal />
         </form>
     );
 }
